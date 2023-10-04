@@ -1,4 +1,4 @@
-import telebot
+import telebot, threading
 from news import (
     news_apple_sfera,
     news_fayer,
@@ -77,9 +77,23 @@ def no_found_command(message):
         list_command =  f"Los comandos disponibles son {', '.join(command_functions.keys())}"
         bot.send_message(message.chat.id, list_command )
 
+
+def listen():
+    """Bucle infinito"""
+    bot.infinity_polling() #ESCUCHA O COMPRUEBA SI SE RECIBEN MSJ NUEVOS, TODO SE DETIENE AQUI, 
+    
+
 if __name__ == '__main__':
+    bot.set_my_commands([
+        telebot.types.BotCommand("/applesfera", "muestra noticias de Apple"),
+        telebot.types.BotCommand("/fayer", "muestra noticias sobre Fayer Wayer"),
+        telebot.types.BotCommand("/google", "muestra noticias - Google News"),
+        telebot.types.BotCommand("/muylinux", "muestra noticias sobre GNU/Linux"),
+        telebot.types.BotCommand("/xatakandorid", "muestra noticias sobre Android"),
+        telebot.types.BotCommand("/xataka", "muestra noticias - Xataka"),
+    ])
     print('='*100)
     print('Iniciando Bot')
     print('='*100)
-    bot.infinity_polling()
-
+    hilo_bot = threading.Thread(target=listen)
+    hilo_bot.start()

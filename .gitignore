@@ -1,3 +1,3 @@
 env
 .vscode
-scrapers/news/config.py
+project/scrapers/news/config.py

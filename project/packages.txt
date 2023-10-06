@@ -1,0 +1,4 @@
+requests
+re
+bs4
+pip install --use-pep517 pyTelegramBotAPI

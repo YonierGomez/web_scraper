@@ -17,7 +17,7 @@ def news(URL, DOMAIN):
         get_news = []
         for r_title in title.find_all('article', class_='IFHyqb DeXSAc'):
 
-            get_news.append(f'*{r_title.div.h4.text}: { r_title.div.a["href"]}')
+            get_news.append(f'*{r_title.div.h4.text}: { DOMAIN + r_title.div.a["href"]}')
 
         return get_news
         

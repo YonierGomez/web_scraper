@@ -49,6 +49,11 @@ def get_xataka_news(message):
     for new in news_xataka.news('https://www.xataka.com/'):
         bot.send_message(message.chat.id, new)
 
+def get_cmd(message):
+    print('Bienvenido al bot de Yonier')
+    print('='*130)
+    bot.send_message(message.chat.id, f"Bienvenid@, este BOT tiene como finalidad obtener noticias de tecnología, utiliza los siguientes comandos {', '.join(command_functions.keys())}")
+
 # Diccionario que mapea comandos a funciones
 command_functions = {
     '/applesfera': get_applesfera_news,
@@ -57,6 +62,7 @@ command_functions = {
     '/muylinux': get_muylinux_news,
     '/xatakandroid': get_xatakandroid_news,
     '/xataka': get_xataka_news,
+    '/start': get_cmd
 }
 
 comandos_sin_slash = [comando[1:] for comando in command_functions.keys()]
@@ -78,22 +84,17 @@ def no_found_command(message):
         bot.send_message(message.chat.id, list_command )
 
 
-def listen():
-    """Bucle infinito"""
-    bot.infinity_polling() #ESCUCHA O COMPRUEBA SI SE RECIBEN MSJ NUEVOS, TODO SE DETIENE AQUI, 
-    
-
 if __name__ == '__main__':
     bot.set_my_commands([
-        telebot.types.BotCommand("/applesfera", "muestra noticias de Apple"),
-        telebot.types.BotCommand("/fayer", "muestra noticias sobre Fayer Wayer"),
-        telebot.types.BotCommand("/google", "muestra noticias - Google News"),
-        telebot.types.BotCommand("/muylinux", "muestra noticias sobre GNU/Linux"),
-        telebot.types.BotCommand("/xatakandorid", "muestra noticias sobre Android"),
-        telebot.types.BotCommand("/xataka", "muestra noticias - Xataka"),
+        telebot.types.BotCommand("/applesfera", "Noticias de Apple"),
+        telebot.types.BotCommand("/fayer", "Noticias sobre Fayer Wayer"),
+        telebot.types.BotCommand("/google", "Noticias - Google News"),
+        telebot.types.BotCommand("/muylinux", "Noticias sobre GNU/Linux"),
+        telebot.types.BotCommand("/xatakandroid", "Noticias sobre Android"),
+        telebot.types.BotCommand("/xataka", "Noticias - Xataka"),
+        telebot.types.BotCommand("/start", "Bienvenido"),
     ])
     print('='*100)
     print('Iniciando Bot')
     print('='*100)
-    hilo_bot = threading.Thread(target=listen)
-    hilo_bot.start()
+    bot.infinity_polling() #ESCUCHA O COMPRUEBA SI SE RECIBEN MSJ NUEVOS, TODO SE DETIENE AQUI, 

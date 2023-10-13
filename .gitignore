@@ -1,3 +1,6 @@
 env
+project/env
 .vscode
-project/scrapers/news/config.py
+project/news/config.py
+project/__pycache__
+project/news/__pycache__/
